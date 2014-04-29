@@ -30,7 +30,7 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
+var margin = {top: 30, right: 40, bottom: 50, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -59,10 +59,18 @@ d3.tsv("data.tsv", type, function(error, data) {
   x.domain(data.map(function(d) { return d.letter; }));
   y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
 
-  svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")     
-      .call(xAxis);
+svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
 
   svg.append("g")
       .attr("class", "y axis")
@@ -85,18 +93,8 @@ d3.tsv("data.tsv", type, function(error, data) {
 
 });
 
-var margin = {top: 30, right: 40, bottom: 50, left: 50},
-svg.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis)
-        .selectAll("text")  
-            .style("text-anchor", "end")
-            .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", function(d) {
-                return "rotate(-65)" 
-                });
+
+
                 
 function type(d) {
   d.frequency = +d.frequency;
