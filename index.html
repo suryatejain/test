@@ -62,6 +62,7 @@ d3.tsv("data.tsv", type, function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "rotate(-90)")
       .call(xAxis);
 
   svg.append("g")
@@ -79,7 +80,6 @@ d3.tsv("data.tsv", type, function(error, data) {
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.letter); })
-      .attr("transform", "rotate(-90)")
       .attr("width", x.rangeBand())
       .attr("y", function(d) { return y(d.frequency); })
       .attr("height", function(d) { return height - y(d.frequency); });
