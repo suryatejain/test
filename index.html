@@ -85,6 +85,19 @@ d3.tsv("data.tsv", type, function(error, data) {
 
 });
 
+var margin = {top: 30, right: 40, bottom: 50, left: 50},
+svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")  
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+                
 function type(d) {
   d.frequency = +d.frequency;
   return d;
